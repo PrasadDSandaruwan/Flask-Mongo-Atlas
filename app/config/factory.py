@@ -34,6 +34,7 @@ def create_app():
     app = Flask(__name__)
     CORS(app)
     app.config['MONGO_URI'] = config["TEST"]["DB_URI"]
+    app.config["SECRET_KEY"] = config["KEY"]["SECRET_KEY"]
 
     app.json_encoder = MongoJsonEncoder
     app.register_blueprint(route_test)

@@ -1,8 +1,28 @@
 
+import imp
 from app.config.bcrypt import get_bcrypt
-from app.db.userRepo import addUserRepo
-# from passlib.hash import sha256_crypt
-# from werkzeug.security import generate_password_hash
+from app.db.userRepo import addUserRepo, getUserByEmailRepo
+from flask import jsonify
+from app.utility.jwt import generateToken
+
+
+def loginService(email,password):
+    user = getUserByEmailRepo(email)
+
+    if not user:
+        return jsonify({'message' : 'Invalid Login !!'}), 401
+
+    bcrypt = get_bcrypt()
+
+    print(user["password"])
+    print(bcrypt.generate_password_hash(password))
+
+    if not bcrypt.check_password_hash(user["password"],password):
+        return jsonify({'message' : 'Invalid Login Password !!'}), 401
+
+    token = generateToken(user)
+    return jsonify({'access_token' :token}), 200 
+
 
 def addUserService(first_name,last_name,email,password):
 
@@ -26,6 +46,10 @@ def addUserService(first_name,last_name,email,password):
     }
 
     addUserRepo(user_details)
+
+
+
+
 
 
 
