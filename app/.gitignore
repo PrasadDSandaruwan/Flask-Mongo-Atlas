@@ -1,2 +1,5 @@
 api/__pycache__
 __pycache__
+service/__pycache__
+db/__pycache__
+config/__pycache__

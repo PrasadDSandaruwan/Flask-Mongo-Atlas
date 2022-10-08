@@ -3,3 +3,4 @@ pymongo[srv]
 Flask-PyMongo
 flask-cors
 bson
+flask-bcrypt

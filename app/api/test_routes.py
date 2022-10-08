@@ -1,6 +1,10 @@
+from urllib import response
 from flask import Blueprint, request, jsonify
 from flask_cors import CORS
 from datetime import datetime
+
+
+# from app.config.db import addUser
 
 
 route_test = Blueprint(
@@ -8,12 +12,12 @@ route_test = Blueprint(
 
 CORS(route_test)
 
-@route_test.route('/', methods=['GET'])
+@route_test.route('/test', methods=['GET'])
 def api_test_get():
-    response = {
-        "Message": "Hellow World"
-    }
-    return jsonify(response)
+  
+    return jsonify({
+        "Message":"Success"
+    }),200
 
 
 
